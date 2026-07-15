@@ -15,7 +15,3 @@ def process_sales(sales):
 #Main Program
 daily_sales = [125.50, 0, 89.75, 210.00, 0, 450.25]
 process_sales(daily_sales)
-
-
-
-    
