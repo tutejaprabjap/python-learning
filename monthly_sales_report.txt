@@ -1,0 +1,7 @@
+Monthly Sales Report
+--------------------
+Total Revenue: $9562.30
+Valid Sales: 8
+Highest Sale: $1620.40
+Lowest Sale: $875.25
+Average Sale: $1195.29
