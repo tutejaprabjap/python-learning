@@ -1,11 +1,3 @@
-def apply_discount(amount, discount_percent):
-    return amount * (1 - discount_percent)
-
-def calculate_transaction_fee(amount):
-    return amount * .02
-
-def calculate_sales1_tax(amount):
-    return amount * .07
 
 def calculate_profit(revenue, expenses):
     """Calculate and return the profit."""
