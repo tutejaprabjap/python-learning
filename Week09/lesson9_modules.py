@@ -4,7 +4,7 @@ amount = 500
 discount_percent = .10
 
 transaction_fee = financial_utils.calculate_transaction_fee(amount)
-sales_tax = financial_utils.calculate_sales_tax(amount)
+sales_tax = financial_utils.calculate_sales1_tax(amount)
 discounted_amount = financial_utils.apply_discount(amount,discount_percent)
 
 
