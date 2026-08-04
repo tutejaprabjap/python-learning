@@ -24,7 +24,7 @@ accounts = [
     business_account,
 ]
 
-print(f"{BankAccount.bank_name}")
+print(BankAccount.bank_name)
 print("Account Management System")
 print("-------------------------")
 print()

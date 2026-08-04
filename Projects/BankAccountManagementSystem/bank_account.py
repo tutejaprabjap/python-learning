@@ -1,3 +1,4 @@
+"""Provide reusable bank account classes for the banking application."""
 # Base Class
 class BankAccount:
 
