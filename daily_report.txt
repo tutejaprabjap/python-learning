@@ -1,6 +1,0 @@
-Daily Sales Report
-------------------
-Total Revenue: $950.50
-Transactions: 5
-Highest Sale: $450.25
-New Sale Recorded: $275.00
