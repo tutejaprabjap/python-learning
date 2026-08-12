@@ -1,7 +1,11 @@
 import os
+
 import requests
 
+
+
 QUOTE_URL = "https://finnhub.io/api/v1/quote"
+PROFILE_URL = "https://finnhub.io/api/v1/stock/profile2"
 
 
 def get_stock_quote(symbol, api_key):
@@ -11,14 +15,14 @@ def get_stock_quote(symbol, api_key):
     }
 
     try:
-        response = requests.get(QUOTE_URL, params=params,timeout=10)
+        response = requests.get(QUOTE_URL, params=params, timeout=10)
         response.raise_for_status()
         quote_data = response.json()
     except requests.exceptions.RequestException as error:
-        print(f"Error requesting stock data: {error}")
+        print(f"Error requesting stock data: {error}.")
         return None
     except requests.exceptions.JSONDecodeError:
-        print("Error: Finnhub returned invaild JSON data")
+        print("Error: Finnhub returned invalid JSON data.")
         return None
 
 
@@ -26,7 +30,7 @@ def get_stock_quote(symbol, api_key):
     previous_close = quote_data.get("pc")
     daily_change = quote_data.get("dp")
 
-    prices = (current_price,previous_close)
+    prices = (current_price, previous_close)
 
     if any(
         isinstance(price,bool)
@@ -41,11 +45,43 @@ def get_stock_quote(symbol, api_key):
     ):
         return None
 
-    return{
+    return {
         "current_price": current_price,
         "previous_close": previous_close,
         "daily_change": daily_change
     }
+
+
+def get_company_name(symbol, api_key):
+    params = {
+        "symbol": symbol,
+        "token": api_key,
+    }
+
+    try:
+        response = requests.get(PROFILE_URL, params=params, timeout=10)
+        response.raise_for_status()
+        profile_data = response.json()
+    except requests.exceptions.RequestException as error:
+        print(f"Error requesting stock data: {error}.")
+        return None
+    except requests.exceptions.JSONDecodeError:
+        print("Error: Finnhub returned invalid JSON data.")
+        return None
+
+    name = profile_data.get("name")
+
+    if not isinstance(name, str):
+        return None
+
+    name = name.strip()
+
+    if not name:
+        return None
+
+    return name
+    
+
 
 def main():
     api_key = os.getenv("FINNHUB_API_KEY")
@@ -66,7 +102,13 @@ def main():
         print(f"Error: No valid quote was found for {symbol}.")
         return
 
-    print(f"\nStock Quote: {symbol}")
+    name = get_company_name(symbol, api_key)
+
+    if name is None:
+        print(f"Error: No valid name was found for {symbol}")
+        return
+
+    print(f"\nStock Quote: {name} ({symbol})")
     print(f"Current price: ${quote['current_price']:.2f}")
     print(f"Previous close: ${quote['previous_close']:.2f}")
     print(f"Daily change: {quote['daily_change']:.2f}%")
