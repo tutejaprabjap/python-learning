@@ -1,11 +1,11 @@
 import os
-
 import requests
 
 
 
 QUOTE_URL = "https://finnhub.io/api/v1/quote"
 PROFILE_URL = "https://finnhub.io/api/v1/stock/profile2"
+
 
 
 def get_stock_quote(symbol, api_key):
